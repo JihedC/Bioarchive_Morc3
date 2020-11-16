@@ -77,14 +77,14 @@ Volcano_genes_labels
 ```
 
 ```{r include=FALSE}
-pdf(file = "~/Dropbox/Work/Manuscripts/Bioarchive_Morc3/output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes.pdf")
+pdf(file = "output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes.pdf")
 Volcano_genes
 Volcano_genes_labels
 dev.off()
 ```
 
 ```{r save unlabel png, include=FALSE}
-png(filename = "~/Dropbox/Work/Manuscripts/Bioarchive_Morc3/output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes.png")
+png(filename = "output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes.png")
 Volcano_genes
 dev.off()
 ```
@@ -92,7 +92,7 @@ dev.off()
 ![Volcalno plot](../output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes.png)
 
 ```{r save label png, include=FALSE}
-png(filename = "~/Dropbox/Work/Manuscripts/Bioarchive_Morc3/output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes_label.png")
+png(filename = "output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes_label.png")
 Volcano_genes_labels
 dev.off()
 
@@ -117,13 +117,13 @@ Volcano_TE
 ```
 
 ```{r save pdf TE volcano, include=FALSE}
-pdf(file = "~/Dropbox/Work/Manuscripts/Bioarchive_Morc3/output/Volcano_plot_Morc3_bioRxiv_RNAseq_TE.pdf")
+pdf(file = "output/Volcano_plot_Morc3_bioRxiv_RNAseq_TE.pdf")
 Volcano_TE
 dev.off()
 ```
 
 ```{r save png TE volcano, include=FALSE}
-png(file = "~/Dropbox/Work/Manuscripts/Bioarchive_Morc3/output/Volcano_plot_Morc3_bioRxiv_RNAseq_TE.png")
+png(file = "output/Volcano_plot_Morc3_bioRxiv_RNAseq_TE.png")
 Volcano_TE
 dev.off()
 ```
