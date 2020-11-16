@@ -100,7 +100,9 @@ dev.off()
 
 ![Labelled Volcalno plot](../output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes_label.png)
 
-There are 165 upregulated genes and 89 downregulated genes (pdaj \< 0.05). \#\# Volcano plot TE
+There are 165 upregulated genes and 89 downregulated genes (pdaj \< 0.05). 
+
+## Volcano plot TE
 
 ```{r TE volcano}
 
