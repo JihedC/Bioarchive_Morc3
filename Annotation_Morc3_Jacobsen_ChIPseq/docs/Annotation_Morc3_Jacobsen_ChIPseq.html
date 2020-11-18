@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jihed" />
+
+<meta name="date" content="2020-11-17" />
+
+<title>Annotation_Morc3_Jacobsen_ChIPseq</title>
+
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Annotation_Morc3_Jacobsen_ChIPseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Annotation_Morc3_Jacobsen_ChIPseq</h1>
+<h4 class="author">Jihed</h4>
+<h4 class="date">2020-11-17</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-11-18
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Annotation_Morc3_Jacobsen_ChIPseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20201117code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20201117)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20201117code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20201117)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJihedCBioarchiveMorc3treec150851e7ca479eba82fad9c557c715fa337c1ddtargetblankc150851a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/JihedC/Bioarchive_Morc3/tree/c150851e7ca479eba82fad9c557c715fa337c1dd" target="_blank">c150851</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomJihedCBioarchiveMorc3treec150851e7ca479eba82fad9c557c715fa337c1ddtargetblankc150851a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/JihedC/Bioarchive_Morc3/tree/c150851e7ca479eba82fad9c557c715fa337c1dd" target="_blank">c150851</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    docs/.DS_Store
+    Ignored:    docs/figure/.DS_Store
+
+Untracked files:
+    Untracked:  Annotation_Morc3_Jacobsen_ChIPseq/
+    Untracked:  data/WTMORC3_Jacobsen_peaks.sorted.annotated.bed
+    Untracked:  data/~$RNA_genes.xlsx
+
+Unstaged changes:
+    Modified:   output/Volcano_plot_Morc3_bioRxiv_RNAseq_TE.pdf
+    Modified:   output/Volcano_plot_Morc3_bioRxiv_RNAseq_genes.pdf
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The goal is to annotate the Morc3 ChIP-seq performed by Jacobsen. Peaks were called based on the provided bigwig files for IP and input.</p>
+</div>
+<div id="analysis-of-morc3-jacobsens-data" class="section level2">
+<h2>Analysis of Morc3 Jacobsen’s data</h2>
+<div id="import-the-data" class="section level3">
+<h3>Import the data</h3>
+<pre class="r"><code>df &lt;- read_excel(&quot;data/WTMORC3_Jacobsen_peaks.sorted.annotated.bed.xlsx&quot;)
+head(df)</code></pre>
+<pre><code># A tibble: 6 x 19
+  PeakID Chr    Start    End Strand Peak_Score Focus Annotation Name  Class
+  &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
+1 peak8… chr3  1.49e8 1.49e8 +           37273 NA    Intergenic (TTA… Simp…
+2 peak1… chrX  1.71e8 1.71e8 +           15395 NA    Intergenic (TTA… Simp…
+3 peak1… chrY  9.08e7 9.08e7 +           12512 NA    intron (N… RLTR… LTR  
+4 peak1… chr6  4.92e6 4.92e6 +            9708 NA    intron (N… (CCC… Simp…
+5 peak1… chr11 5.15e7 5.15e7 +            8815 NA    intron (N… (CCC… Simp…
+6 peak1… chrX  1.71e8 1.71e8 +            5635 NA    Intergenic (TTA… Simp…
+# … with 9 more variables: Family &lt;chr&gt;, Entrez_ID &lt;dbl&gt;,
+#   Nearest_Unigene &lt;chr&gt;, Nearest_Refseq &lt;chr&gt;, Nearest_Ensembl &lt;chr&gt;,
+#   Gene_Name &lt;chr&gt;, Gene_Alias &lt;chr&gt;, Gene_Description &lt;chr&gt;, Gene_Type &lt;chr&gt;</code></pre>
+<p>The Df contain a lot of NA, I replace the NA in the column family since if this column is empty it means that the annotation was a gene (intron or exon).</p>
+<pre class="r"><code>df_2 &lt;- replace_na(df$Family, &quot;genic&quot;)</code></pre>
+<p>And I bind the dataframe together before using the summarize function.</p>
+<pre class="r"><code>df_3 &lt;- cbind(df, df_2)
+head(df_3)</code></pre>
+<pre><code>    PeakID   Chr     Start       End Strand Peak_Score Focus
+1  peak834  chr3 149052451 149052950      +      37273    NA
+2 peak1461  chrX 170880901 170881350      +      15395    NA
+3 peak1496  chrY  90797601  90824850      +      12512    NA
+4 peak1032  chr6   4923801   4924200      +       9708    NA
+5  peak179 chr11  51455601  51455850      +       8815    NA
+6 peak1460  chrX 170758151 170758500      +       5635    NA
+                             Annotation      Name         Class        Family
+1                            Intergenic (TTAGGG)n Simple_repeat Simple_repeat
+2                            Intergenic (TTAGGG)n Simple_repeat Simple_repeat
+3     intron (NM_133362, intron 2 of 3)    RLTR40           LTR          ERVK
+4 intron (NM_001363809, intron 2 of 15) (CCCTAA)n Simple_repeat Simple_repeat
+5    intron (NM_153393, intron 2 of 28) (CCCTAA)n Simple_repeat Simple_repeat
+6                            Intergenic (TTAGGG)n Simple_repeat Simple_repeat
+  Entrez_ID Nearest_Unigene Nearest_Refseq    Nearest_Ensembl Gene_Name
+1     99633         Mm.9776   NM_001081298 ENSMUSG00000028184    Adgrl2
+2    107626       Mm.486144   NM_001199212 ENSMUSG00000093806      Asmt
+3    170942        Mm.76062      NM_133362 ENSMUSG00000096768     Erdr1
+4    243725       Mm.332901      NM_181595 ENSMUSG00000032827   Ppp1r9a
+5     72947       Mm.256875      NM_028398 ENSMUSG00000020359    Phykpl
+6    107626       Mm.486144   NM_001199212 ENSMUSG00000093806      Asmt
+                                                                    Gene_Alias
+1                             AI450192|CIRL-2|Gm619|Lec1|Lphh1|Lphn2|mKIAA0786
+2                                                                        Hiomt
+3                                                                          edr
+4 2810430P21Rik|4930518N04Rik|5330407E15|A230094E16Rik|BB181831|NRB|neurabin-I
+5                                                        2900006B13Rik|Agxt2l2
+6                                                                        Hiomt
+                              Gene_Description      Gene_Type          df_2
+1       adhesion G protein-coupled receptor L2 protein-coding Simple_repeat
+2          acetylserotonin O-methyltransferase protein-coding Simple_repeat
+3        erythroid differentiation regulator 1 protein-coding          ERVK
+4 protein phosphatase 1, regulatory subunit 9A protein-coding Simple_repeat
+5       5-phosphohydroxy-L-lysine phospholyase protein-coding Simple_repeat
+6          acetylserotonin O-methyltransferase protein-coding Simple_repeat</code></pre>
+</div>
+<div id="summarise-data-of-2018" class="section level3">
+<h3>Summarise data of 2018</h3>
+<pre class="r"><code>df_3$df_2 &lt;- as.factor(df_3$df_2)
+
+table &lt;- df_3 %&gt;% 
+  group_by(df_2) %&gt;%
+  summarise(n = n())</code></pre>
+<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>colnames(table) &lt;- c(&quot;Repeat&quot;, &quot;data_2018&quot;)</code></pre>
+</div>
+</div>
+<div id="analysis-of-bioarchive-data" class="section level2">
+<h2>Analysis of Bioarchive data</h2>
+<div id="import-the-data-1" class="section level3">
+<h3>Import the data</h3>
+<pre class="r"><code>BioRXiv_Morc3 &lt;- read_excel(&quot;data/BioRXiv_Morc3.xlsx&quot;)
+head(BioRXiv_Morc3)</code></pre>
+<pre><code># A tibble: 6 x 19
+  PeakID Chr    Start    End Strand Peak_Score Focus Annotation Name  Class
+  &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;
+1 Morc3… chr10 3.69e7 3.69e7 +               0 NA    Intergenic RMER… LTR  
+2 Morc3… chr1  1.18e8 1.18e8 +               0 NA    Intergenic IAPE… LTR  
+3 Morc3… chr15 5.21e7 5.21e7 +               0 NA    Intergenic IAPE… LTR  
+4 Morc3… chr4  8.03e7 8.03e7 +               0 NA    Intergenic IAPE… LTR  
+5 Morc3… chr17 6.75e6 6.75e6 +               0 NA    intron (N… intr… &lt;NA&gt; 
+6 Morc3… chr11 1.06e7 1.06e7 +               0 NA    Intergenic RLTR… LTR  
+# … with 9 more variables: Family &lt;chr&gt;, Entrez_ID &lt;dbl&gt;,
+#   Nearest_Unigene &lt;chr&gt;, Nearest_Refseq &lt;chr&gt;, Nearest_Ensembl &lt;chr&gt;,
+#   Gene_Name &lt;chr&gt;, Gene_Alias &lt;chr&gt;, Gene_Description &lt;chr&gt;, Gene_Type &lt;chr&gt;</code></pre>
+<pre class="r"><code>BioRXiv_Morc3_2 &lt;- replace_na(BioRXiv_Morc3$Family, &quot;genic&quot;)
+
+BioRXiv_Morc3_3 &lt;- cbind(BioRXiv_Morc3, BioRXiv_Morc3_2)
+head(BioRXiv_Morc3_3)</code></pre>
+<pre><code>           PeakID   Chr     Start       End Strand Peak_Score Focus
+1  Morc3_peak_397 chr10  36923649  36923960      +          0    NA
+2  Morc3_peak_230  chr1 117634260 117634607      +          0    NA
+3 Morc3_peak_1038 chr15  52082429  52082737      +          0    NA
+4 Morc3_peak_1851  chr4  80261456  80261773      +          0    NA
+5 Morc3_peak_1185 chr17   6745166   6745488      +          0    NA
+6  Morc3_peak_517 chr11  10611925  10612275      +          0    NA
+                          Annotation                               Name Class
+1                         Intergenic                           RMER17D2   LTR
+2                         Intergenic                          IAPEz-int   LTR
+3                         Intergenic                          IAPEz-int   LTR
+4                         Intergenic                          IAPEz-int   LTR
+5 intron (NM_009510, intron 7 of 12) intron (NM_009510, intron 7 of 12)  &lt;NA&gt;
+6                         Intergenic                           RLTR13D6   LTR
+  Family Entrez_ID Nearest_Unigene Nearest_Refseq    Nearest_Ensembl Gene_Name
+1   ERVK     15182        Mm.19806      NM_008229 ENSMUSG00000019777     Hdac2
+2   ERVK     22099       Mm.426637      NM_011650 ENSMUSG00000026374       Tsn
+3   ERVK    239435        Mm.24204      NM_175503 ENSMUSG00000068522      Aard
+4   ERVK     22178        Mm.30438      NM_031202 ENSMUSG00000005994     Tyrp1
+5   &lt;NA&gt;     22350       Mm.277812      NM_009510 ENSMUSG00000052397       Ezr
+6   ERVK    319922       Mm.337851      NM_177033 ENSMUSG00000050830      Vwc2
+                               Gene_Alias
+1             D10Wsu179e|YAF1|Yy1bp|mRPD3
+2      2610034C24Rik|AU040286|C3PO|TB-RBP
+3                           A5D3|AV328152
+4        Oca3|TRP-1|TRP1|Tyrp|b|brown|isa
+5                AW146364|R75297|Vil2|p81
+6 A930041G11Rik|G11|PSST739|UNQ739|cradin
+                                     Gene_Description      Gene_Type
+1                               histone deacetylase 2 protein-coding
+2                                            translin protein-coding
+3 alanine and arginine rich domain containing protein protein-coding
+4                        tyrosinase-related protein 1 protein-coding
+5                                               ezrin protein-coding
+6         von Willebrand factor C domain containing 2 protein-coding
+  BioRXiv_Morc3_2
+1            ERVK
+2            ERVK
+3            ERVK
+4            ERVK
+5           genic
+6            ERVK</code></pre>
+</div>
+<div id="summarise-data-of-2020" class="section level3">
+<h3>Summarise data of 2020</h3>
+<pre class="r"><code>BioRXiv_Morc3_3BioRXiv_Morc3_2 &lt;- as.factor(BioRXiv_Morc3_3$BioRXiv_Morc3_2)
+
+table_2 &lt;- BioRXiv_Morc3_3 %&gt;% 
+  group_by(BioRXiv_Morc3_2) %&gt;%
+  summarise(n = n())</code></pre>
+<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>colnames(table_2) &lt;- c(&quot;Repeat&quot;, &quot;data_2020&quot;)</code></pre>
+</div>
+</div>
+<div id="vizualiztion" class="section level2">
+<h2>Vizualiztion</h2>
+<p>I have now the value of Morc3 ChIP_peaks in both 2018 and 2020 datasets. I will merge the two tables</p>
+<div id="preparation-of-the-dataframe" class="section level3">
+<h3>Preparation of the dataframe</h3>
+<pre class="r"><code>final_table &lt;- left_join(table,table_2)</code></pre>
+<pre><code>Joining, by = &quot;Repeat&quot;</code></pre>
+<pre class="r"><code>tidy_table &lt;- final_table %&gt;% 
+  gather(key = &quot;Year&quot;, value = &quot;number&quot;, data_2018, data_2020)</code></pre>
+</div>
+<div id="ggplot" class="section level3">
+<h3>ggplot</h3>
+<pre class="r"><code>test &lt;- tidy_table %&gt;%
+  filter( Repeat == &quot;ERVK&quot; | Repeat == &quot;genic&quot; | Repeat == &quot;L1&quot;|
+                          Repeat ==&quot;Satellite&quot;| Repeat ==&quot;Simple_repeat&quot;) 
+
+test</code></pre>
+<pre><code># A tibble: 10 x 3
+   Repeat        Year      number
+   &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt;
+ 1 ERVK          data_2018   1048
+ 2 genic         data_2018    335
+ 3 L1            data_2018     28
+ 4 Satellite     data_2018      3
+ 5 Simple_repeat data_2018     33
+ 6 ERVK          data_2020   1854
+ 7 genic         data_2020    315
+ 8 L1            data_2020    145
+ 9 Satellite     data_2020      6
+10 Simple_repeat data_2020     21</code></pre>
+<pre class="r"><code>p1 &lt;- ggplot(test, aes(x=Year, y=number, fill = Repeat)) +
+  geom_bar(stat = &quot;identity&quot;, width = 0.6) +
+  coord_flip()+
+  theme_classic()+
+  scale_fill_brewer(palette = &quot;Set1&quot;)+
+  xlab(&quot;Datasets&quot;) +
+  ylab(&quot;Number of Peaks&quot;) +
+  ggtitle(&quot;Overlap of Morc3 ChIP-seq peaks with mm10 genomic features&quot;)
+
+p1 </code></pre>
+<p><img src="figure/Annotation_Morc3_Jacobsen_ChIPseq.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggsave(p1, filename = &quot;output/Peak_distribution.pdf&quot;, dpi = 600)</code></pre>
+<pre><code>Saving 7 x 5 in image</code></pre>
+<pre class="r"><code>p2 &lt;- ggplot(test, aes(x=Year, y=number, fill = Repeat)) +
+  geom_col(position = &quot;fill&quot;, width = 0.6) +
+  coord_flip()+
+  theme_classic()+
+  scale_fill_brewer(palette = &quot;Set1&quot;)+
+  xlab(&quot;Datasets&quot;) +
+  ylab(&quot;Number of Peaks&quot;) +
+  ggtitle(&quot;Overlap of Morc3 ChIP-seq peaks with mm10 genomic features&quot;)
+
+p2</code></pre>
+<p><img src="figure/Annotation_Morc3_Jacobsen_ChIPseq.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggsave(p2, filename = &quot;output/Peak_distribution_proportion.pdf&quot;, dpi = 600)</code></pre>
+<pre><code>Saving 7 x 5 in image</code></pre>
+<pre class="r"><code>pdf(file = &quot;output/assembled_plot_distribution.pdf&quot;, width = 15)
+plot_grid(p1, p2, labels = c(&quot;A&quot;, &quot;B&quot;), label_size =  12)
+dev.off()</code></pre>
+<pre><code>quartz_off_screen 
+                2 </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] fr_FR.UTF-8/fr_FR.UTF-8/fr_FR.UTF-8/C/fr_FR.UTF-8/fr_FR.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] cowplot_1.1.0     viridis_0.5.1     viridisLite_0.3.0 dplyr_1.0.2      
+ [5] stringr_1.4.0     tidyr_1.1.2       readxl_1.3.1      readr_1.4.0      
+ [9] ggplot2_3.3.2     workflowr_1.6.2  
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.5         RColorBrewer_1.1-2 cellranger_1.1.0   pillar_1.4.6      
+ [5] compiler_4.0.3     later_1.1.0.1      git2r_0.27.1       tools_4.0.3       
+ [9] digest_0.6.27      evaluate_0.14      lifecycle_0.2.0    tibble_3.0.4      
+[13] gtable_0.3.0       pkgconfig_2.0.3    rlang_0.4.8        cli_2.1.0         
+[17] rstudioapi_0.13    yaml_2.2.1         xfun_0.19          gridExtra_2.3     
+[21] withr_2.3.0        knitr_1.30         hms_0.5.3          generics_0.1.0    
+[25] fs_1.5.0           vctrs_0.3.4        rprojroot_2.0.2    grid_4.0.3        
+[29] tidyselect_1.1.0   glue_1.4.2         R6_2.5.0           fansi_0.4.1       
+[33] rmarkdown_2.5      farver_2.0.3       purrr_0.3.4        magrittr_1.5      
+[37] scales_1.1.1       promises_1.1.1     ellipsis_0.3.1     htmltools_0.5.0   
+[41] assertthat_0.2.1   colorspace_2.0-0   httpuv_1.5.4       labeling_0.4.2    
+[45] utf8_1.1.4         stringi_1.5.3      munsell_0.5.0      crayon_1.3.4      </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
