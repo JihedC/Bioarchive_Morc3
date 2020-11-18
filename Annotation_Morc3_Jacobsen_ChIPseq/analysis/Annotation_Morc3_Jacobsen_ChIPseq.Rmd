@@ -1,0 +1,157 @@
+---
+title: "Annotation_Morc3_Jacobsen_ChIPseq"
+author: "Jihed"
+date: "2020-11-17"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+The goal is to annotate the Morc3 ChIP-seq performed by Jacobsen. Peaks were 
+called based on the provided bigwig files for IP and input.
+```{r libraries, include=FALSE}
+library(ggplot2)
+library(readr)
+library(readxl)
+library(tidyr)
+library(stringr)
+library(dplyr)
+library(viridis)
+library(cowplot)
+```
+
+
+## Analysis of Morc3 Jacobsen's data 
+
+### Import the data 
+
+
+```{r}
+df <- read_excel("data/WTMORC3_Jacobsen_peaks.sorted.annotated.bed.xlsx")
+head(df)
+```
+
+
+The Df contain a lot of NA, I replace the NA in the column family since if this
+column is empty it means that the annotation was a gene (intron or exon).
+```{r}
+df_2 <- replace_na(df$Family, "genic")
+```
+
+And I bind the dataframe together before using the summarize function.
+
+```{r}
+df_3 <- cbind(df, df_2)
+head(df_3)
+```
+
+### Summarise data of 2018
+```{r}
+df_3$df_2 <- as.factor(df_3$df_2)
+
+table <- df_3 %>% 
+  group_by(df_2) %>%
+  summarise(n = n())
+
+colnames(table) <- c("Repeat", "data_2018")
+```
+
+
+## Analysis of Bioarchive data 
+
+### Import the data 
+
+
+```{r}
+BioRXiv_Morc3 <- read_excel("data/BioRXiv_Morc3.xlsx")
+head(BioRXiv_Morc3)
+
+BioRXiv_Morc3_2 <- replace_na(BioRXiv_Morc3$Family, "genic")
+
+BioRXiv_Morc3_3 <- cbind(BioRXiv_Morc3, BioRXiv_Morc3_2)
+head(BioRXiv_Morc3_3)
+```
+
+
+### Summarise data of 2020
+```{r}
+BioRXiv_Morc3_3BioRXiv_Morc3_2 <- as.factor(BioRXiv_Morc3_3$BioRXiv_Morc3_2)
+
+table_2 <- BioRXiv_Morc3_3 %>% 
+  group_by(BioRXiv_Morc3_2) %>%
+  summarise(n = n())
+
+colnames(table_2) <- c("Repeat", "data_2020")
+```
+
+## Vizualiztion
+
+
+I have now the value of Morc3 ChIP_peaks in both 2018 and 2020 datasets.
+I will merge the two tables 
+
+### Preparation of the dataframe
+```{r}
+final_table <- left_join(table,table_2)
+
+
+tidy_table <- final_table %>% 
+  gather(key = "Year", value = "number", data_2018, data_2020)
+```
+
+### ggplot
+
+
+```{r}
+test <- tidy_table %>%
+  filter( Repeat == "ERVK" | Repeat == "genic" | Repeat == "L1"|
+                          Repeat =="Satellite"| Repeat =="Simple_repeat") 
+
+test
+```
+
+
+```{r}
+p1 <- ggplot(test, aes(x=Year, y=number, fill = Repeat)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  coord_flip()+
+  theme_classic()+
+  scale_fill_brewer(palette = "Set1")+
+  xlab("Datasets") +
+  ylab("Number of Peaks") +
+  ggtitle("Overlap of Morc3 ChIP-seq peaks with mm10 genomic features")
+
+p1 
+
+```
+
+```{r}
+ggsave(p1, filename = "output/Peak_distribution.pdf", dpi = 600)
+```
+
+```{r}
+p2 <- ggplot(test, aes(x=Year, y=number, fill = Repeat)) +
+  geom_col(position = "fill", width = 0.6) +
+  coord_flip()+
+  theme_classic()+
+  scale_fill_brewer(palette = "Set1")+
+  xlab("Datasets") +
+  ylab("Number of Peaks") +
+  ggtitle("Overlap of Morc3 ChIP-seq peaks with mm10 genomic features")
+
+p2
+```
+
+```{r}
+ggsave(p2, filename = "output/Peak_distribution_proportion.pdf", dpi = 600)
+
+```
+
+```{r}
+pdf(file = "output/assembled_plot_distribution.pdf", width = 15)
+plot_grid(p1, p2, labels = c("A", "B"), label_size =  12)
+dev.off()
+```
+

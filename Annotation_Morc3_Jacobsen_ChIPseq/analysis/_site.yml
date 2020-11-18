@@ -1,0 +1,17 @@
+name: "Annotation_Morc3_Jacobsen_ChIPseq"
+output_dir: ../docs
+navbar:
+  title: "Annotation_Morc3_Jacobsen_ChIPseq"
+  left:
+  - text: Home
+    href: index.html
+  - text: About
+    href: about.html
+  - text: License
+    href: license.html
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: yes
+    theme: cosmo
+    highlight: textmate
